@@ -16,7 +16,9 @@ function getComputerChoice()  {
   else if (choice===1){
     computerChoice ='paper'
   }
-  else {(computerChoice='scissors')}
+  else {
+    (computerChoice='scissors')
+  }
   return("Computer Choice", computerChoice)
 }
 
@@ -46,7 +48,9 @@ function playRound(){
     (playerChoice === "scissors" && computerChoice === "paper")){
     result="you won"
   }
-  else {result="you lose"}  
+  else {
+    result="you lose"
+  }  
   return result
 }
 
@@ -72,30 +76,31 @@ function playRound(){
  let endOfGame
 
  function game(){
-    for (let i = 0; i<5; i++){
-      console.log("player Choice", playerChoice =  prompt("what is your choice?").toLowerCase());
-      playRound();
-      console.log("Computer Choice",computerChoice )
-      console.log(result)
-        if (result === "you won"){
-          yourScore ++ 
-        }
-        else if (result === "you lose"){
-          compScore ++
-        }
-      console.log(yourScore, "your Score")  
-      console.log(compScore, "comp Score")
-   
-   }
-    if (yourScore>compScore){
-      endOfGame = "you Won the game"
-    }
-    else if (yourScore<compScore){
-      endOfGame = "you Lost the game"
-    }
-    else {endOfGame = "the game is a tie"}
-    console.log(endOfGame)
+  for (let i = 0; i<5; i++){
+    console.log("player Choice", playerChoice =  prompt("what is your choice?").toLowerCase());
+    playRound();
+    console.log("Computer Choice",computerChoice )
+    console.log(result)
+      if (result === "you won"){
+        yourScore ++ 
+      }
+      else if (result === "you lose"){
+        compScore ++
+      }
+    console.log(yourScore, "your Score")  
+    console.log(compScore, "comp Score")
   }
+  if (yourScore>compScore){
+    endOfGame = "you Won the game"
+  }
+  else if (yourScore<compScore){
+    endOfGame = "you Lost the game"
+  }
+  else {
+    endOfGame = "the game is a tie"
+  }
+  console.log(endOfGame)
+}
 
   game() 
 
