@@ -36,10 +36,17 @@ function getComputerChoice()  {
   // else result is "you lose"
 // return the result
 
-let playerChoice 
-   
+
+const rockButton = document.querySelector('#rock');
+const paperButton = document.querySelector('#paper');
+const scissorsButton = document.querySelector('#scissors');
+
+
+
+
 function playRound(){
   getComputerChoice()
+
   if(playerChoice === computerChoice){
     result="tie"
   } 
@@ -51,8 +58,58 @@ function playRound(){
   else {
     result="you lose"
   }  
+  console.log("player Choice", playerChoice)
+  console.log("computer Choice", computerChoice)
+  console.log(result)
   return result
 }
+
+
+
+
+
+   
+
+
+rockButton.addEventListener('click', function(e){ 
+  playerChoice = rockButton.id
+  playRound()
+});
+
+
+paperButton.addEventListener('click', function(e){
+  playerChoice = paperButton.id
+  playRound()
+});
+
+scissorsButton.addEventListener('click', function(e){
+  playerChoice = scissorsButton.id
+  playRound()
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -75,7 +132,7 @@ function playRound(){
  let compScore = 0
  let endOfGame
 
- function game(){
+ /*function game(){
   for (let i = 0; i<5; i++){
     console.log("player Choice", playerChoice =  prompt("what is your choice?").toLowerCase());
     playRound();
@@ -103,5 +160,5 @@ function playRound(){
 }
 
   game() 
-
+*/
     
