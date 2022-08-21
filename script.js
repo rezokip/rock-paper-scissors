@@ -1,12 +1,47 @@
-// write a var for computerChoice
-// write a funktion for getting the Computer choice (getComputerChoice)
+
+// get button ids with querrySelector
+const rockButton = document.querySelector('#rock');
+const paperButton = document.querySelector('#paper');
+const scissorsButton = document.querySelector('#scissors');
+
+// get display-results id with querry Selector
+const resultsContainer = document.querySelector('#results-container')
+
+// create the elements (your choice, computer choice, your score, 
+  // computer score, result this round, end result)
+// give the elements a class with classList.add
+// append them to the Parent (display-results)
+const yourChoiceElement = document.createElement('p');
+yourChoiceElement.classList.add = ('your-choice');
+resultsContainer.appendChild(yourChoiceElement);
+
+const computerChoiceElement = document.createElement('p');
+computerChoiceElement.classList.add = ('computer-choice');
+resultsContainer.appendChild(computerChoiceElement) 
+
+const roundResultElement = document.createElement('p');
+roundResultElement.classList.add = ('round-result');
+resultsContainer.appendChild(roundResultElement);
+
+const yourScoreElement = document.createElement('p');
+yourScoreElement.classList.add = ('your-score');
+resultsContainer.appendChild(yourScoreElement);
+
+const compScoreElement = document.createElement('p');
+compScoreElement.classList.add = ('computer-score')
+resultsContainer.appendChild(compScoreElement);
+
+const endOfGameElement = document.createElement('p');
+endOfGameElement.classList.add = ('computer-score')
+resultsContainer.appendChild(endOfGameElement);
+
+
+
+// Helper Function for getting Computer Choice
 // write a math.random method for getting a random number (choice) between 0 and 2
-  // if choice equals 0 then computer Choice becomes rock
   // if choice equals 1 then computer Choice becomes paper
   // else the computer Choice becomes scissors
 // return the computer Choice
-
-let computerChoice
 
 function getComputerChoice()  {  
   let choice= Math.floor(Math.random()*3)
@@ -23,54 +58,86 @@ function getComputerChoice()  {
 }
 
 
-
-// write a var for playerChoice
-// write a funktion for playRound
-// call the getComputerChoice inside the playRound function (to be able to compare player and computer...)
+// Helper Function to getting result
 // compare the player choice and computer choice together
-  // if the choices are equal, then result is "tie"
-  /*if the player choice is rock && the computer choice is scissors 
-    OR|| the player choice is paper && the computer choice is rock
-    OR|| the player choice is scissors && the computer choice is paper
-    then result is "you won"*/
-  // else result is "you lose"
-// return the result
+// if the choices are equal, then result is "tie"
+// else if compare every posibility to win with (&& and || operator) 
+  //then the result is you won
+// else result is "you lose"
 
-
-const rockButton = document.querySelector('#rock');
-const paperButton = document.querySelector('#paper');
-const scissorsButton = document.querySelector('#scissors');
-
-
-
-
-function playRound(){
-  getComputerChoice()
-
+let getResult =() =>{
   if(playerChoice === computerChoice){
-    result="tie"
-  } 
-  else if((playerChoice ==="rock" && computerChoice === "scissors") ||
-    (playerChoice === "paper" && computerChoice === "rock") ||
-    (playerChoice === "scissors" && computerChoice === "paper")){
-    result="you won"
-  }
-  else {
-    result="you lose"
-  }  
-  console.log("player Choice", playerChoice)
-  console.log("computer Choice", computerChoice)
-  console.log(result)
-  return result
+  result="tie"
+} 
+else if((playerChoice ==="rock" && computerChoice === "scissors") ||
+  (playerChoice === "paper" && computerChoice === "rock") ||
+  (playerChoice === "scissors" && computerChoice === "paper")){
+  result="you won"
+}
+else {
+  result="you lose"
+}  
+ return result;
 }
 
 
+// Helper Function for comparing result
+let compareResult = () =>{
+  if (result === "you won"){
+    yourScore ++ 
+  }
+  else if (result === "you lose"){
+    compScore ++
+  }
+}
 
 
+// Helper Function for comparing scores
+// look if one of it hits 5 
+// compare the scores together after one of it hits 5
+  // if your score is higher you win, if comp score is hihger you lose
 
-   
+let compareScore = () =>{
+  if (yourScore === 5 || compScore === 5){
+    if (yourScore>compScore){
+    endOfGame = "you Won the game"
+    }
+  else if (yourScore<compScore){
+    endOfGame = "you Lost the game"
+    }
+    return endOfGame
+  }
+}
 
 
+// Helper Function for binding textcontent
+// give the created html elements appropiate text content
+  // to show the results on page
+let writeTextContent = () =>{
+  yourChoiceElement.textContent ="you chose " + playerChoice;
+  computerChoiceElement.textContent= "computer chose " + computerChoice;
+  roundResultElement.textContent= result + " this round"
+  yourScoreElement.textContent= " your Score: " + yourScore   
+  compScoreElement.textContent= "computer Score: " + compScore  
+  endOfGameElement.textContent= endOfGame
+}
+
+
+// write a function for playRound
+// call the Helper Functions
+function playRound(){
+  getComputerChoice()
+  getResult()
+  compareResult()
+  compareScore()
+  writeTextContent()
+}
+
+
+// write an Event Listener click for every button
+  // after getting the click, look in the function(e) 
+  // initialize the playerChoice to the appropriate button
+  // call the PlayRound function
 rockButton.addEventListener('click', function(e){ 
   playerChoice = rockButton.id
   playRound()
@@ -86,13 +153,6 @@ scissorsButton.addEventListener('click', function(e){
   playerChoice = scissorsButton.id
   playRound()
 });
-
-
-
-
-
-
-
 
 
 
