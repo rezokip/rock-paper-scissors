@@ -8,7 +8,7 @@ const scissorsButton = document.querySelector('#scissors');
 const resultsContainer = document.querySelector('#results-container')
 
 // create the elements (your choice, computer choice, your score, 
-  // computer score, result this round, end result)
+  // computer score, result this round, end result, new game button)
 // give the elements a class with classList.add
 // append them to the Parent (display-results)
 const yourChoiceElement = document.createElement('p');
@@ -35,7 +35,11 @@ const endOfGameElement = document.createElement('p');
 endOfGameElement.classList.add = ('computer-score')
 resultsContainer.appendChild(endOfGameElement);
 
-
+const newGameButton=document.createElement('button')
+newGameButton.classList.add ='newgame-button';
+newGameButton.textContent = 'Try Again'
+resultsContainer.appendChild(newGameButton)
+newGameButton.disabled=true;
 
 // Helper Function for getting Computer Choice
 // write a math.random method for getting a random number (choice) between 0 and 2
@@ -92,21 +96,28 @@ let compareResult = () =>{
 }
 
 
-// Helper Function for comparing scores
+// Helper Function for comparing scores and ending the game
 // look if one of it hits 5 
-// compare the scores together after one of it hits 5
-  // if your score is higher you win, if comp score is hihger you lose
+  // enable the newgame button 
+  // disable the rock paper scissors buttons
+  // compare the scores together after one of it hits 5
+    // if your score is higher you win, if comp score is hihger you lose
 
 let compareScore = () =>{
   if (yourScore === 5 || compScore === 5){
+    newGameButton.disabled=false;
+    rockButton.disabled = true;
+    paperButton.disabled = true;
+    scissorsButton.disabled = true;
+
     if (yourScore>compScore){
     endOfGame = "you Won the game"
     }
   else if (yourScore<compScore){
     endOfGame = "you Lost the game"
     }
-    return endOfGame
-  }
+    return endOfGame 
+  } 
 }
 
 
@@ -143,7 +154,6 @@ rockButton.addEventListener('click', function(e){
   playRound()
 });
 
-
 paperButton.addEventListener('click', function(e){
   playerChoice = paperButton.id
   playRound()
@@ -154,8 +164,24 @@ scissorsButton.addEventListener('click', function(e){
   playRound()
 });
 
-
-
+// write an Event Listener click for the newGame button
+  // after pressing the button, set the scores to 0,
+  // reset the Text content
+  // enable the rock, paper, scissors button and disable the try again button
+newGameButton.addEventListener('click', () =>{
+  yourScore = 0;
+  compScore = 0;
+  yourChoiceElement.textContent ="you chose " + playerChoice;
+  computerChoiceElement.textContent= "computer chose " + computerChoice;
+  roundResultElement.textContent= result + " this round"
+  yourScoreElement.textContent= " your Score: " + yourScore   
+  compScoreElement.textContent= "computer Score: " + compScore  
+  endOfGameElement.textContent= endOfGame
+  rockButton.disabled = false;
+  paperButton.disabled = false;
+  scissorsButton.disabled = false;
+  newGameButton.disabled=true;
+} )
 
 
 
