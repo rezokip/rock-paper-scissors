@@ -1,21 +1,199 @@
 <!DOCTYPE html>
 <html>
   <head>
-    
+    <style>
+      *{
+        margin:0;
+        padding:0;
+      }    
+      *,
+      *::before,
+      *::after{
+        box-sizing: border-box;
+      }
+      body{
+        font-family: Arial, Helvetica, sans-serif;
+        display: grid;
+        place-content: center;
+        min-height: 100vh;
+
+      }
+      img,
+      svg{
+        max-width: 100%;
+        display: block;
+        
+      }
+
+
+
+
+     
+
+
+
+
+
+     /* main*/ header{
+        
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center;
+        align-items: center;   
+        
+      }
+
+      .score-section{
+          position: absolute;
+          margin: auto;
+          top: 100px;
+          display: flex;
+          margin-bottom: 200px;
+          gap: 100px;
+          width: 1050px;
+          
+        }
+
+        #your-score-container,
+        #computer-score-container{
+          
+          color: red;
+          font-size: 50px;
+          font-weight: bold;
+          display: flex;
+          gap: 10px;
+          flex: 1;
+        }
+
+
+      .rock-paper-scissors-container{ 
+        display: flex;
+        justify-content: space-evenly;
+        gap: 200px;
+        margin-bottom: 200px;
+        
+       
+
+      }
+  
+      .rock-paper-scissors-container div{
+        width: 150px;
+        height: 150px;
+        border: solid;
+        border-radius: 800px;
+        overflow: hidden;
+        
+        
+          
+        }
+
+        .rock-paper-scissors-container div:hover{
+          border: none;
+        }
+        #rock:active, 
+        #paper:active, 
+        #scissors:active{
+          width: 155px;
+        }
+        #rock:active{
+          margin: -3px;
+        }
+       
+
+        .rock-paper-scissors-container div img{
+          max-width: 130%;
+          object-fit: contain;
+          object-position: -20px;
+        }
+        
+        .rock-paper-scissors-container button {
+          border: none;
+        }
+
+      .results_container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        flex: 1;
+      }
+
+       
+        .choice-container{
+          display: flex;
+          gap: 200px;
+          
+          
+        }
+        .choice-container div{
+          flex: 1;
+          width: 150px;
+          height: 150px;
+          border-radius: 300px;
+          
+          overflow: hidden;  
+          
+        }
+        .choice-container div img{
+          max-width: 130%;
+          object-fit: contain;
+          object-position: -20px;
+        }
+
+        
+    </style>
 
   </head>
 
 
   <body>
-    <button id="rock">rock</button>
-    <button id="paper">paper</button>
-    <button id="scissors">scissors</button>
+    <header>
+      <div class="score-section">
+            <div id="your-score-container">your Score:  </div>
+            <div id="computer-score-container">computer Score:  </div>
+          </div>
+           <div id="end-of-game-container">
+             <p id="end-of-game-element"></p>  
+             <div>
+               <button id="newgame-button">Try Again</button>
+             </div>
+           </div>
+    </header>
+          
+    
+    <main>
+      <div class="rock-paper-scissors-container">
+        <div>
+          <button id="rock"><img src="images/rock.jpg"></button>
+        </div>
+        <div>
+          <button id="paper"><img src="images/paper.png"></button>
+        </div>
+        <div>
+          <button id="scissors"><img src="images/scissor.jpg" alt=""></button>
+        </div>
+      </div>
 
-    <div id="results-container">
+      <div id="results-container" class="results_container">
+        <div class="choice-container">
+          <div class="your-choice-container"id="your-choice-container"></div>
+          <div id="computer-choice-container"></div>
+        </div>
+
+       
+      </div>
       
-    </div>
+      
+    </main>
+   
+      
+      
+      <h1>Welcome to Rock, Paper, Scissors</h1>
+      <button id="playgame-button">Lets Play</button>
 
-
+   
     <script src="script.js"></script>
 
   </body>

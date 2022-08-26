@@ -1,45 +1,56 @@
+// get id with querry Selector
+const resultsContainer = document.querySelector('#results-container');
+const yourChoiceContainer = document.querySelector('#your-choice-container');
+const computerChoiceContainer = document.querySelector('#computer-choice-container');
+const yourScoreContainer = document.querySelector('#your-score-container');
+const computerScoreContainer= document.querySelector('#computer-score-container');
+const endOfGameContainer = document.querySelector('#end-of-game-container')
 
-// get button ids with querrySelector
 const rockButton = document.querySelector('#rock');
 const paperButton = document.querySelector('#paper');
 const scissorsButton = document.querySelector('#scissors');
+const playGameButton = document.querySelector('#playgame-button')
+const newGameButton = document.querySelector('#newgame-button')
 
-// get display-results id with querry Selector
-const resultsContainer = document.querySelector('#results-container')
+
+// at the start of the page hide the elements with display-none
+document.querySelector('main').style.display = "none"
+endOfGameContainer.style.display ="none";
+yourScoreContainer.style.display ="none"
+computerScoreContainer.style.display ="none"
+
 
 // create the elements (your choice, computer choice, your score, 
-  // computer score, result this round, end result, new game button)
+  // computer score, end game element)
 // give the elements a class with classList.add
-// append them to the Parent (display-results)
-const yourChoiceElement = document.createElement('p');
-yourChoiceElement.classList.add = ('your-choice');
-resultsContainer.appendChild(yourChoiceElement);
+// append them to the Parent 
 
-const computerChoiceElement = document.createElement('p');
-computerChoiceElement.classList.add = ('computer-choice');
-resultsContainer.appendChild(computerChoiceElement) 
+//const yourChoiceElement = document.createElement('div');
+//yourChoiceElement.classList.add = ('your-choice');
+//yourChoiceContainer.appendChild(yourChoiceElement);
 
-const roundResultElement = document.createElement('p');
-roundResultElement.classList.add = ('round-result');
-resultsContainer.appendChild(roundResultElement);
+//const computerChoiceElement = document.createElement('div');
+//computerChoiceElement.classList.add = ('computer-choice');
+//computerChoiceContainer.appendChild(computerChoiceElement) 
 
 const yourScoreElement = document.createElement('p');
 yourScoreElement.classList.add = ('your-score');
-resultsContainer.appendChild(yourScoreElement);
+yourScoreContainer.appendChild(yourScoreElement);
 
 const compScoreElement = document.createElement('p');
 compScoreElement.classList.add = ('computer-score')
-resultsContainer.appendChild(compScoreElement);
+computerScoreContainer.appendChild(compScoreElement);
 
-const endOfGameElement = document.createElement('p');
-endOfGameElement.classList.add = ('computer-score')
-resultsContainer.appendChild(endOfGameElement);
+const yourChoiceImage= document.createElement('img')
+yourChoiceContainer.appendChild(yourChoiceImage)
 
-const newGameButton=document.createElement('button')
-newGameButton.classList.add ='newgame-button';
-newGameButton.textContent = 'Try Again'
-resultsContainer.appendChild(newGameButton)
-newGameButton.disabled=true;
+const computerChoiceImage = document.createElement('img')
+computerChoiceContainer.appendChild(computerChoiceImage)
+
+
+const endOfGameElement = document.querySelector('#end-of-game-element');
+//endOfGameContainer.appendChild(endOfGameElement);
+
 
 // Helper Function for getting Computer Choice
 // write a math.random method for getting a random number (choice) between 0 and 2
@@ -48,17 +59,11 @@ newGameButton.disabled=true;
 // return the computer Choice
 
 function getComputerChoice()  {  
-  let choice= Math.floor(Math.random()*3)
-  if(choice===0){
-    computerChoice= 'rock'
-  }
-  else if (choice===1){
-    computerChoice ='paper'
-  }
-  else {
-    (computerChoice='scissors')
-  }
+  let choice = ['rock', 'paper', 'scissors']
+  
+  computerChoice = choice[Math.floor(Math.random()*3)];
   return("Computer Choice", computerChoice)
+
 }
 
 
@@ -100,15 +105,15 @@ let compareResult = () =>{
 // look if one of it hits 5 
   // enable the newgame button 
   // disable the rock paper scissors buttons
+  // hide (display none) the main elements
+  // show (display block) the end game elements
   // compare the scores together after one of it hits 5
     // if your score is higher you win, if comp score is hihger you lose
 
-let compareScore = () =>{
+let endingTheGame = () =>{
   if (yourScore === 5 || compScore === 5){
-    newGameButton.disabled=false;
-    rockButton.disabled = true;
-    paperButton.disabled = true;
-    scissorsButton.disabled = true;
+    document.querySelector('main').style.display = "none"
+    endOfGameContainer.style.display ="block"
 
     if (yourScore>compScore){
     endOfGame = "you Won the game"
@@ -121,27 +126,57 @@ let compareScore = () =>{
 }
 
 
-// Helper Function for binding textcontent
+// Helper Function for binding textcontent and image
 // give the created html elements appropiate text content
   // to show the results on page
-let writeTextContent = () =>{
-  yourChoiceElement.textContent ="you chose " + playerChoice;
-  computerChoiceElement.textContent= "computer chose " + computerChoice;
-  roundResultElement.textContent= result + " this round"
-  yourScoreElement.textContent= " your Score: " + yourScore   
-  compScoreElement.textContent= "computer Score: " + compScore  
-  endOfGameElement.textContent= endOfGame
+
+
+  let writeContent = () =>{
+    getYourChoiceImage  ()
+    getComputerChoiceImage()
+   
+  
+
+  
+    yourScoreElement.textContent= yourScore   
+    compScoreElement.textContent= compScore  
+    endOfGameElement.textContent= endOfGame
+  }
+  
+
+let getYourChoiceImage = () =>{
+  
+  if (playerChoice === "rock"){
+    yourChoiceImage.src = "images/rock.jpg"
+  }
+  else if(playerChoice==="paper"){
+    yourChoiceImage.src = "images/paper.png"
+  }
+   else if(playerChoice==="scissors") {
+    yourChoiceImage.src = "images/scissor.jpg"
+   }
 }
 
-
+let getComputerChoiceImage = () =>{
+  if (computerChoice === "rock"){
+    computerChoiceImage.src = "images/rock.jpg"
+  }
+  else if(computerChoice==="paper"){
+    computerChoiceImage.src = "images/paper.png"
+  }
+   else if(computerChoice==="scissors") {
+    computerChoiceImage.src = "images/scissor.jpg"
+   } 
+}
 // write a function for playRound
-// call the Helper Functions
+//call the Helper Functions
 function playRound(){
+  
   getComputerChoice()
   getResult()
-  compareResult()
-  compareScore()
-  writeTextContent()
+  compareResult() 
+  endingTheGame()
+  writeContent()
 }
 
 
@@ -150,16 +185,28 @@ function playRound(){
   // initialize the playerChoice to the appropriate button
   // call the PlayRound function
 rockButton.addEventListener('click', function(e){ 
+  yourChoiceImage.style.display ="block"
+  yourChoiceContainer.style.border ="solid green"
+  computerChoiceImage.style.display="block"
+  computerChoiceContainer.style.border="solid red"
   playerChoice = rockButton.id
   playRound()
 });
 
 paperButton.addEventListener('click', function(e){
+  yourChoiceImage.style.display ="block"
+  yourChoiceContainer.style.border ="solid green"
+  computerChoiceImage.style.display="block"
+  computerChoiceContainer.style.border="solid red"
   playerChoice = paperButton.id
   playRound()
 });
 
 scissorsButton.addEventListener('click', function(e){
+  yourChoiceImage.style.display ="block"
+  yourChoiceContainer.style.border ="solid green"
+  computerChoiceImage.style.display="block"
+  computerChoiceContainer.style.border="solid red"
   playerChoice = scissorsButton.id
   playRound()
 });
@@ -171,21 +218,34 @@ scissorsButton.addEventListener('click', function(e){
 newGameButton.addEventListener('click', () =>{
   yourScore = 0;
   compScore = 0;
-  yourChoiceElement.textContent ="you chose " + playerChoice;
-  computerChoiceElement.textContent= "computer chose " + computerChoice;
-  roundResultElement.textContent= result + " this round"
-  yourScoreElement.textContent= " your Score: " + yourScore   
-  compScoreElement.textContent= "computer Score: " + compScore  
-  endOfGameElement.textContent= endOfGame
+ // yourChoiceElement.textContent = ""
+  //computerChoiceElement.textContent= "";
+  yourScoreElement.textContent= "";
+  compScoreElement.textContent= "";
+  endOfGameElement.textContent= ""
   rockButton.disabled = false;
   paperButton.disabled = false;
   scissorsButton.disabled = false;
-  newGameButton.disabled=true;
+  //newGameButton.disabled=true;
+  document.querySelector('main').style.display = "block"
+  yourChoiceImage.style.display ="none"
+  computerChoiceImage.style.display="none"
+  endOfGameContainer.style.display="none"
+  yourChoiceContainer.style.border="none"
+  computerChoiceContainer.style.border="none"
 } )
 
 
-
-
+// write an event listener click for playgame button
+  //after pressing the button, hide the button with display-none
+  //after pressing the button, display the main element with display-block
+playGameButton.addEventListener('click', () =>{
+  document.querySelector('main').style.display = "block"
+  yourScoreContainer.style.display ="flex"
+  computerScoreContainer.style.display ="flex"
+  document.querySelector('h1').style.display = "none" 
+  playGameButton.style.display = "none"
+})
 
 
 
@@ -248,3 +308,6 @@ newGameButton.addEventListener('click', () =>{
   game() 
 */
     
+
+
+
