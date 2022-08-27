@@ -13,6 +13,7 @@ const playGameButton = document.querySelector('#playgame-button')
 const newGameButton = document.querySelector('#newgame-button')
 
 
+const endOfGameElement = document.querySelector('#end-of-game-element');
 // at the start of the page hide the elements with display-none
 document.querySelector('main').style.display = "none"
 endOfGameContainer.style.display ="none";
@@ -20,18 +21,9 @@ yourScoreContainer.style.display ="none"
 computerScoreContainer.style.display ="none"
 
 
-// create the elements (your choice, computer choice, your score, 
-  // computer score, end game element)
+// create the elements 
 // give the elements a class with classList.add
 // append them to the Parent 
-
-//const yourChoiceElement = document.createElement('div');
-//yourChoiceElement.classList.add = ('your-choice');
-//yourChoiceContainer.appendChild(yourChoiceElement);
-
-//const computerChoiceElement = document.createElement('div');
-//computerChoiceElement.classList.add = ('computer-choice');
-//computerChoiceContainer.appendChild(computerChoiceElement) 
 
 const yourScoreElement = document.createElement('p');
 yourScoreElement.classList.add = ('your-score');
@@ -48,14 +40,12 @@ const computerChoiceImage = document.createElement('img')
 computerChoiceContainer.appendChild(computerChoiceImage)
 
 
-const endOfGameElement = document.querySelector('#end-of-game-element');
-//endOfGameContainer.appendChild(endOfGameElement);
-
 
 // Helper Function for getting Computer Choice
-// write a math.random method for getting a random number (choice) between 0 and 2
-  // if choice equals 1 then computer Choice becomes paper
-  // else the computer Choice becomes scissors
+  // write an choice array with [rock,paper,scissors]
+  // computerChoice equals a random number between the array 
+  // write a math.random method for getting a random number (choice) between 0 and 2
+  
 // return the computer Choice
 
 function getComputerChoice()  {  
@@ -103,8 +93,6 @@ let compareResult = () =>{
 
 // Helper Function for comparing scores and ending the game
 // look if one of it hits 5 
-  // enable the newgame button 
-  // disable the rock paper scissors buttons
   // hide (display none) the main elements
   // show (display block) the end game elements
   // compare the scores together after one of it hits 5
@@ -112,14 +100,17 @@ let compareResult = () =>{
 
 let endingTheGame = () =>{
   if (yourScore === 5 || compScore === 5){
-    document.querySelector('main').style.display = "none"
-    endOfGameContainer.style.display ="block"
+    
+    document.querySelector('#r-p-s-container').style.display ="none"
+    endOfGameContainer.style.display ="flex"
 
     if (yourScore>compScore){
     endOfGame = "you Won the game"
+    endOfGameElement.style.color ="green"
     }
   else if (yourScore<compScore){
     endOfGame = "you Lost the game"
+    endOfGameElement.style.color ="red"
     }
     return endOfGame 
   } 
@@ -127,25 +118,22 @@ let endingTheGame = () =>{
 
 
 // Helper Function for binding textcontent and image
-// give the created html elements appropiate text content
+  // call getYourChoiceImage and getComputerChoiceImage
+  // give the created html elements appropiate text content
   // to show the results on page
 
 
   let writeContent = () =>{
     getYourChoiceImage  ()
     getComputerChoiceImage()
-   
-  
-
-  
     yourScoreElement.textContent= yourScore   
     compScoreElement.textContent= compScore  
     endOfGameElement.textContent= endOfGame
   }
   
-
+// Helper functions for getting your choice image and computer choice images
+  // if player Choice is rock then image equals rock and so on
 let getYourChoiceImage = () =>{
-  
   if (playerChoice === "rock"){
     yourChoiceImage.src = "images/rock.jpg"
   }
@@ -182,6 +170,8 @@ function playRound(){
 
 // write an Event Listener click for every button
   // after getting the click, look in the function(e) 
+  // show the your Choice Image and Computer choice image with display block
+  // give your Choice Contaiener and Comptuer Choice container border with color
   // initialize the playerChoice to the appropriate button
   // call the PlayRound function
 rockButton.addEventListener('click', function(e){ 
@@ -211,6 +201,7 @@ scissorsButton.addEventListener('click', function(e){
   playRound()
 });
 
+
 // write an Event Listener click for the newGame button
   // after pressing the button, set the scores to 0,
   // reset the Text content
@@ -218,16 +209,10 @@ scissorsButton.addEventListener('click', function(e){
 newGameButton.addEventListener('click', () =>{
   yourScore = 0;
   compScore = 0;
- // yourChoiceElement.textContent = ""
-  //computerChoiceElement.textContent= "";
-  yourScoreElement.textContent= "";
-  compScoreElement.textContent= "";
-  endOfGameElement.textContent= ""
-  rockButton.disabled = false;
-  paperButton.disabled = false;
-  scissorsButton.disabled = false;
-  //newGameButton.disabled=true;
   document.querySelector('main').style.display = "block"
+  document.querySelector('#r-p-s-container').style.display ="flex"
+  yourScoreElement.textContent = ""
+  compScoreElement.textContent =""
   yourChoiceImage.style.display ="none"
   computerChoiceImage.style.display="none"
   endOfGameContainer.style.display="none"
@@ -259,55 +244,13 @@ playGameButton.addEventListener('click', () =>{
 
 
 
-// write a var called yourScore and compScore to compare the scores 
-// write a loop that runs 5 times (a game goes 5 times)
-  // every loop the player gets a prompt massage to pick his choice
-  // call the PlayRound funktion inside the loop to play one round
-  // the player needs to be able to see his choice, computer choice and the result (console.log)
-  // if you get a point (result equals "you won") yourscore increments by one 
-  // if the computer gets a point (result equals "you lose") his score incements by one
-  // the player needs to be albe to see compScore and yourScore (console.log)
-// after the loop compare yourScore and compScore
-// if yourScore is greater then compScore then you win the game
-// if yourScore is less then compScore then you lose the game
-// if yourScore equals compScore then the game is a Tie
-// the player needs to be able to see what the end of the game is (console.log) 
 
 
  let yourScore = 0
  let compScore = 0
  let endOfGame
 
- /*function game(){
-  for (let i = 0; i<5; i++){
-    console.log("player Choice", playerChoice =  prompt("what is your choice?").toLowerCase());
-    playRound();
-    console.log("Computer Choice",computerChoice )
-    console.log(result)
-      if (result === "you won"){
-        yourScore ++ 
-      }
-      else if (result === "you lose"){
-        compScore ++
-      }
-    console.log(yourScore, "your Score")  
-    console.log(compScore, "comp Score")
-  }
-  if (yourScore>compScore){
-    endOfGame = "you Won the game"
-  }
-  else if (yourScore<compScore){
-    endOfGame = "you Lost the game"
-  }
-  else {
-    endOfGame = "the game is a tie"
-  }
-  console.log(endOfGame)
-}
 
-  game() 
-*/
-    
 
 
 

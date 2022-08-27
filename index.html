@@ -29,7 +29,7 @@
 
 
      
-
+     
 
 
 
@@ -55,10 +55,17 @@
           
         }
 
+        #your-score-container{
+          color: green;
+        }
+
+        #computer-score-container{
+          color: red;
+        }
+
         #your-score-container,
         #computer-score-container{
-          
-          color: red;
+                 
           font-size: 50px;
           font-weight: bold;
           display: flex;
@@ -118,13 +125,14 @@
         align-items: center;
         
         flex: 1;
+
       }
 
        
         .choice-container{
+          
           display: flex;
           gap: 200px;
-          
           
         }
         .choice-container div{
@@ -134,15 +142,41 @@
           border-radius: 300px;
           
           overflow: hidden;  
-          
+       
         }
         .choice-container div img{
           max-width: 130%;
           object-fit: contain;
           object-position: -20px;
+         
         }
 
-        
+        #end-of-game-container{
+          
+          
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          margin: 70px 0px;
+         
+        }
+        #end-of-game-element{
+          font-size: 80px;
+          font-weight: bold;
+        }
+        #newgame-button, #playgame-button{
+          background-color: rgb(5, 5, 116);
+          color: white;
+          font-size: 50px;
+          font-weight: bold;
+          border-radius: 20px;
+          margin-top: 20px;
+          padding: 20px;
+        }
+        #newgame-button:hover, #playgame-button:hover{
+          cursor: pointer;
+        }
     </style>
 
   </head>
@@ -150,21 +184,21 @@
 
   <body>
     <header>
-      <div class="score-section">
+          <div class="score-section">
             <div id="your-score-container">your Score:  </div>
             <div id="computer-score-container">computer Score:  </div>
           </div>
-           <div id="end-of-game-container">
+          <div id="end-of-game-container">
              <p id="end-of-game-element"></p>  
              <div>
                <button id="newgame-button">Try Again</button>
              </div>
-           </div>
+          </div>
     </header>
           
     
     <main>
-      <div class="rock-paper-scissors-container">
+      <div id ="r-p-s-container" class="rock-paper-scissors-container">
         <div>
           <button id="rock"><img src="images/rock.jpg"></button>
         </div>
